@@ -1,0 +1,10 @@
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+F:\NADYA PC\lab works\summer practise 2021\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources

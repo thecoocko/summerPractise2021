@@ -1,0 +1,10 @@
+F:\NADYA PC\lab works\summer practise 2021\t3_2\bin\Debug\t3_2.exe.config
+F:\NADYA PC\lab works\summer practise 2021\t3_2\bin\Debug\t3_2.exe
+F:\NADYA PC\lab works\summer practise 2021\t3_2\bin\Debug\t3_2.pdb
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.csprojAssemblyReference.cache
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.Form1.resources
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.Properties.Resources.resources
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.csproj.GenerateResource.cache
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.csproj.CoreCompileInputs.cache
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.exe
+F:\NADYA PC\lab works\summer practise 2021\t3_2\obj\Debug\t3_2.pdb
