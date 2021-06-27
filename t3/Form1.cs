@@ -80,11 +80,14 @@ namespace t3_2
                     {
                         t1 = Convert.ToDouble(textBox5.Text);
                         t2 = Convert.ToDouble(textBox7.Text);
+                        while (j < n)
+                        {
 
                         dValues.Add(Math.Round(Math.PI * s0 * Math.Pow(k, 2) / (t1 + t2), 5));
                         iValues.Add(Math.Round(Math.Pow(func1(t1, t2, a, t, s0, k), 2) / dValues[j], 5));
                         k += 0.02;
                         j++;
+                        }
                     }
 
                     double[] iValuesArr = iValues.ToArray<double>();//трансформування зі списка значень у масив значень
