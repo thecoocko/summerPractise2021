@@ -13,47 +13,48 @@ namespace t2
 {
     public partial class Form1 : Form
     {
-        static public double[] x = new double[31] {8.95812222196633, 9.04213974804818 ,   8.22837739803321  ,  8.38233516040625   , 7.96026116395293 ,   8.45832085857074 ,   6.90430609612860 ,   7.29108611040741 ,   6.83773404573824 ,  6.31468644204417   , 7.47190299624606  ,  5.02015153957762   , 4.42716369959236 ,   6.42074111604984  ,  3.94574341908293 ,   4.16000000000000,    3.71896662905046  ,  4.41901672002027 ,   3.97260254254854  ,  7.51459547223694 ,   4.92231581492826 ,   3.41637686833560 ,   3.73187800833698  ,  3.25507818797356 ,   4.94317265839110  ,  3.98174270514267  ,  5.70002130305613 ,   3.53160049284908   , 4.29846733147555   , 3.68223325119182,    4.62472075723728
- };
+        static public double[] x = new double[] { 8.96, 9.04, 8.23, 8.38, 7.96, 8.46, 6.90, 7.29, 6.84, 6.31, 7.47, 5.02, 4.43, 6.42, 3.95, 4.16, 3.72, 4.42, 3.97, 7.51, 4.92, 3.42, 3.73, 3.26, 4.94, 3.98, 5.70, 3.53, 4.30, 3.68, 4.62 };
         static public int m = 30;
         static public double omega = Math.PI / x.Length;
         static public double expectedvalue()
         {
             double mx = 0;
-            foreach (int i in x)
+            for (int i = 1; i < x.Length; i++)
             {
-                mx += i;
+                mx += x[i];
             }
-            return Math.Round(mx *(1.0/m),5);
+            return Math.Round(mx/30,5);
         }
         static public double exVal = expectedvalue();
         static public double variance()
         {
             double d = 0;
-            double koef = 1 / m;
-            for (int i = 0; i < x.Length; i++)
+
+            for (int i = 1; i < x.Length; i++)
             {
                 d += Math.Pow(x[i] - exVal, 2);
 
             }
-            return Math.Round(koef * d, 5);
+
+            return Math.Round(d / 29, 5);
         }
         
         static private double[] correlFunc()
         {
             List<double> correlValues = new List<double> { };
-            double v = 0, koef = 0; int j = 0;
-            for (int i = 1; i < m - j; i++)
-            {
-                koef = 1.0 / (x[i] - exVal);
-                while (j < 15)
-                {
-                    v = (x[i] - exVal) * (x[i + j] - exVal);
-                    j++;
-                }
+            double[] v = new double[30]; int i = 0;
 
-                correlValues.Add(Math.Round(v * koef, 5));
-            }
+            do
+            {
+                for (int j = 0; j < x.Length - i; j++)
+                {
+                    v[i] += ((x[j] - exVal) * (x[i + j] - exVal));
+                }
+                v[i] /= (x.Length - i);
+
+                correlValues.Add(Math.Round(v[i], 5));
+                i++;
+            } while (i <= (x.Length / 2));
             double[] val = correlValues.ToArray<double>();
             return val;
         }
@@ -72,12 +73,12 @@ namespace t2
         {
             double phiSq = 4.0 / (Math.Pow(omega, 2) + 1);
             double[] correlValues = correlFunc();
-            double[] spectralDensityValuesY = new double[15] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            double[] correlValuesY = new double[15] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            double[] spectralDensityValuesY = new double[15];
+            double[] correlValuesY = new double[15];
 
             double [] spectralDensity()
             {
-                double[] spectralDensityValues = new double[15] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                double[] spectralDensityValues = new double[15];
                 
                 for(int i = 0; i < correlValues.Length; i++)
                 {
