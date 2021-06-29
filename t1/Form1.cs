@@ -7,24 +7,23 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        static public double[] x = new double[] { 8.96, 9.04, 8.23, 8.38, 7.96, 8.46, 6.90, 7.29, 6.84, 6.31, 7.47, 5.02, 4.43, 6.42, 3.95, 4.16, 3.72, 4.42, 3.97, 7.51, 4.92, 3.42, 3.73, 3.26, 4.94, 3.98, 5.70, 3.53, 4.30, 3.68, 4.62 };
-        //static public double[] x = new double[] { 4.12, 3.26, 2.96, 6.18, 5.58, 6.88, 6.62, 6.08, 5.05, 4.95, 5.46, 7.06, 4.42, 3.08, 3.84, 4.68, 4.84, 4.84, 3.82, 4.88, 6.24, 6.71, 6.35, 7.15, 8.38, 9.30, 7.47, 7.37, 8.29, 9.02 };
-
+        static public double[] x = new double[] { 8.96, 9.04, 8.23, 8.38, 7.96, 8.46, 6.90, 7.29, 6.84, 6.31, 7.47, 5.02, 4.43, 6.42, 3.95, 4.16, 3.72, 4.42, 3.97, 7.51, 4.92, 3.42, 3.73, 3.26, 4.94, 3.98, 5.70, 3.53, 4.30, 3.68};
+        
         static public double expectedvalue()
         {
             double mx = 0;
-            for (int i = 1; i < x.Length; i++)
+            for (int i = 0; i < x.Length; i++)
             {
                 mx += x[i];
             }
-            return Math.Round(mx / 30, 2);
+            return Math.Round(mx / 30, 5);
         }
         static public double exVal = expectedvalue();
         static public double variance()
         {
             double d = 0;
 
-            for (int i = 1; i < x.Length; i++)
+            for (int i = 0; i < x.Length; i++)
             {
                 d += Math.Pow(x[i] - exVal, 2);
 
@@ -52,14 +51,14 @@ namespace WindowsFormsApp1
             double[] val = correlValues.ToArray<double>();
             return val;
         }
-        double getSumDispVal(double[] correl, int o)
+        private double getSumDesp(double[] array, int k)
         {
-            double s = 0;
-            for (int i = 0; i < correl.Length; i++)
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
             {
-                s += correl[i] * Math.Cos(i * (o * (-Math.PI / correl.Length)) * 1);
+                sum += array[i] * Math.Cos(i * (k * (-Math.PI / array.Length)) * 1);
             }
-            return Math.Round(s, 5);
+            return sum;
         }
 
         public Form1()
@@ -136,12 +135,14 @@ namespace WindowsFormsApp1
 
             double[] desp = new double[11];
 
+            
             for (int i = 0; i <= 10; i++)
             {
-                desp[i] = Math.Round(getSumDispVal(correlV(), i) / 30,5);
+                desp[i] = getSumDesp(correlV(), i) / 30;
+                
             }
 
-            
+
 
             void showGraphAndDataDisp()
             {

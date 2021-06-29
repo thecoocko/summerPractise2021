@@ -391,7 +391,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Text = "Завдання 1. Бутенко Н.В.";
+            this.Text = "Визначення характеристик СВП";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
