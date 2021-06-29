@@ -1,63 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-    //    static public double[] x = new double[31] { 8.95812222196633 ,9.04213974804818    ,8.22837739803321   , 8.38233516040625  ,  7.96026116395293 ,   8.45832085857074 ,   6.9043060961286 ,7.29108611040741  ,  6.83773404573824 ,   6.31468644204417 ,   7.47190299624606  ,  5.02015153957762 ,   4.42716369959236 ,   6.42074111604984 ,   3.94574341908293,    4.16  ,  3.71896662905046  ,  4.41901672002027    ,3.97260254254854 ,7.51459547223694
-    //, 4.92231581492826 ,  3.4163768683356, 3.73187800833698  ,  3.25507818797356   , 4.9431726583911, 3.98174270514267  ,  5.70002130305613   , 3.53160049284908  ,  4.29846733147555   , 3.68223325119182 , 4.123993};
-
-        static public int m = 30;
-        static public double[] x = new double[31] { 2.17, 1.955, 1.394, 0.206, -1.135, -1.208, -1.585, -1.099, 0.165, 0.31, 0.913, 0.981, 0.633, -0.222, -1.814, -2.07, -2.685, -1.809, -1.397, -0.547, 0.415, 1.159, 1.754, 1.083, 0.561, 0.353, -0.882, -0.568, 0.387, 1.123, 0.436 };
+        static public double[] x = new double[] { 8.96, 9.04, 8.23, 8.38, 7.96, 8.46, 6.90, 7.29, 6.84, 6.31, 7.47, 5.02, 4.43, 6.42, 3.95, 4.16, 3.72, 4.42, 3.97, 7.51, 4.92, 3.42, 3.73, 3.26, 4.94, 3.98, 5.70, 3.53, 4.30, 3.68, 4.62 };
+        //static public double[] x = new double[] { 4.12, 3.26, 2.96, 6.18, 5.58, 6.88, 6.62, 6.08, 5.05, 4.95, 5.46, 7.06, 4.42, 3.08, 3.84, 4.68, 4.84, 4.84, 3.82, 4.88, 6.24, 6.71, 6.35, 7.15, 8.38, 9.30, 7.47, 7.37, 8.29, 9.02 };
 
         static public double expectedvalue()
         {
             double mx = 0;
-            for (int i = 1; i < m; i++)
+            for (int i = 1; i < x.Length; i++)
             {
                 mx += x[i];
             }
-            return Math.Round(mx/m,5);
+            return Math.Round(mx / 30, 2);
         }
         static public double exVal = expectedvalue();
         static public double variance()
         {
             double d = 0;
-            
-            for (int i = 1; i < m; i++)
+
+            for (int i = 1; i < x.Length; i++)
             {
                 d += Math.Pow(x[i] - exVal, 2);
-                
+
             }
-            return Math.Round(d/(m-1),5);
+
+            return Math.Round(d / (29), 5);
         }
-        
-        static  public double [] correlV()
+
+        static public double[] correlV()
         {
             List<double> correlValues = new List<double> { };
-            double v = 0, koef = 0; int k = 0;
+            double[] v = new double[30]; int i = 0;
 
-            while (k < 15)
+            do
             {
-                koef = 1.0 / (m - k);
-
-                for (int i = 1; i < m - k; i++)
+                for (int j = 0; j < x.Length - i; j++)
                 {
-                    v += (x[i] - exVal) * (x[i + k] - exVal);
+                    v[i] += ((x[j] - exVal) * (x[i + j] - exVal));
                 }
-                correlValues.Add(Math.Round(v * koef, 5));
-                k++;
-            }
+                v[i] /= (x.Length - i);
+
+                correlValues.Add(Math.Round(v[i], 5));
+                i++;
+            } while (i <= (x.Length / 2));
             double[] val = correlValues.ToArray<double>();
             return val;
+        }
+        double getSumDispVal(double[] correl, int o)
+        {
+            double s = 0;
+            for (int i = 0; i < correl.Length; i++)
+            {
+                s += correl[i] * Math.Cos(i * (o * (-Math.PI / correl.Length)) * 1);
+            }
+            return Math.Round(s, 5);
         }
 
         public Form1()
@@ -65,52 +67,28 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
             double[] val = correlV();
-            
-            void graphCorrelFunc()
+
+            void showGraphCorrelFunc()
             {
                 dataGridView1.Rows.Clear();
 
                 dataGridView1.Columns.Add("i" + 0, "i");
+                dataGridView1.Columns[0].Width = 25;
                 dataGridView1.Columns.Add("K" + 0, "K");
+                dataGridView1.Columns[1].Width = 50;
+
                 for (int i = 0; i < val.Length; i++)
                 {
                     dataGridView1.Rows.Add();
@@ -127,7 +105,7 @@ namespace WindowsFormsApp1
             }
 
 
-            void graphx()
+            void showGraphX()
             {
                 chart2.Series[0].Points.Clear();
                 chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -137,10 +115,10 @@ namespace WindowsFormsApp1
                 }
             }
 
-            graphx();
-            graphCorrelFunc();
+            showGraphX();
+            showGraphCorrelFunc();
 
-            this.button2.Enabled = false;
+            button2.Enabled = false;
 
         }
 
@@ -149,32 +127,66 @@ namespace WindowsFormsApp1
 
             label5.Text = Convert.ToString(expectedvalue());
             label6.Text = Convert.ToString(variance());
-            
-        }
+            button1.Enabled = false;
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Бутенко Надія Віталіївна\n124-19-2");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            List<double> d = new List<double> { };
-            double[] k = correlV();
-            double d0 = 0;
-            double omega1 = Math.PI / 30;
-            double []
-            
-            for(int i =0; i < m - 1; i++)
-            {
-                d0 += k[i]; 
-            }
-            d0 = d0 / m;
 
-            for( int i = 0; i < m - 1; i++)
+            double[] desp = new double[11];
+
+            for (int i = 0; i <= 10; i++)
             {
-                d.Add(k[i]*Math.Cos(i*omega);
+                desp[i] = Math.Round(getSumDispVal(correlV(), i) / 30,5);
             }
+
+            
+
+            void showGraphAndDataDisp()
+            {
+                dataGridView3.Rows.Clear();
+
+                dataGridView3.Columns.Add("i" + 0, "i");
+                dataGridView3.Columns[0].Width = 25;
+                dataGridView3.Columns.Add("K" + 0, "K");
+                dataGridView3.Columns[1].Width = 50;
+
+                for (int i = 0; i < desp.Length; i++)
+                {
+                    dataGridView3.Rows.Add();
+                    dataGridView3.Rows[i].Cells[1].Value = desp[i].ToString();
+                    dataGridView3[0, i].Value = i.ToString();
+                }
+
+                chart4.Series[0].Points.Clear();
+                chart4.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
+                for (int i = 0; i < desp.Length; i++)
+                {
+                    chart4.Series[0].Points.AddXY(i, desp[i]);
+                }
+            }
+            showGraphAndDataDisp();
+            button6.Enabled = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            chart1.Series[0].Points.Clear();
+            chart2.Series[0].Points.Clear();
+            chart4.Series[0].Points.Clear();
+
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+            dataGridView3.Rows.Clear();
+            dataGridView3.Columns.Clear();
+
+            label5.Text = "0";
+            label6.Text = "0";
+
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button6.Enabled = true;
         }
     }
 }
