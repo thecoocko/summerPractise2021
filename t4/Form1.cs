@@ -9,6 +9,8 @@ namespace t4
     public partial class Form1 : Form
     {
         static public double[,] matrixA = new double[5, 5] { { 1, 1, 1, 1, 1 }, { 0.5, -2.6, 0.7, 0, 0 }, { 0, 1.2, -1.7, 0, 0.6 }, { 0, 0, 1, -0.7, 0 }, { 0, 0.6, 0, 0.4, -1.2 } };//матриця А
+       
+        
 
         static public double[] matrixB = new double[5] { 1, 0, 0, 0,0 };//матриця Б
 
@@ -37,11 +39,31 @@ namespace t4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string[] sX = textBox1.Text.Split(' ');
+
+            if (sX.Length == 30)
+            {
+                for (int i = 0; i < sX.Length; i++)
+                {
+                    for (int j = 0; j < sX.Length; j++)
+                    {
+                        matrixA[i,j] = Convert.ToDouble(sX[i]);
+                    }
+                    
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Перевищена або недостатня допустима кількість вимірів");
+                textBox1.Text = "";
+            }
             List<double> p0 = new List<double> { };
             List<double> p1 = new List<double> { };
             List<double> p2 = new List<double> { };
             List<double> p3 = new List<double> { };
             List<double> p4 = new List<double> { };
+
 
             p1.Add(0); p2.Add(0); p3.Add(0); p4.Add(0); p0.Add(p1[0] - p2[0] - p3[0] - p4[0]);
 
@@ -63,8 +85,10 @@ namespace t4
 
             double [] systemSolver()//функція, що обчислює точне значення системи рівнянь
             {
+                
                 alglib.rmatrixsolve(matrixA, 5, matrixB, out int info, out alglib.densesolverreport rep, out solution);//обчислення системи рівнянь із залученням 
                 return solution;//бібліотеки alglib
+               
             }
             void systemSolverOut()//вивід отриманих значень
             {
@@ -137,6 +161,16 @@ namespace t4
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = "1 1 1 1 1\n0.5 -2.6 0.7 0 0\n0 1.2 -1.7 0 0.6\n0 0 1 -0.7 0\n0 0.6 0 0.4 -1.2";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
         {
 
         }
